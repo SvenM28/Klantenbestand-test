@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Klantenbestand - Ace RP</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+    table { border-collapse: collapse; width: 100%; background: white; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #333; color: white; }
+    input[type="text"], input[type="date"] { width: 100%; box-sizing: border-box; }
+    button { margin-top: 10px; padding: 8px 12px; }
+  </style>
+</head>
+<body>
+  <h2>Klantenbestand - Ace RP</h2>
+  <table id="klantenTabel">
+    <thead>
+      <tr>
+        <th>Voor + Achternaam</th>
+        <th>Klant sinds</th>
+        <th>Levert (Cocaïne/Wiet/Meth)</th>
+        <th>Aantal geleverd</th>
+        <th>Acties</th>
+      </tr>
+    </thead>
+    <tbody id="tabelBody"></tbody>
+  </table>
+
+  <button onclick="voegRijToe()">+ Nieuwe klant toevoegen</button>
+
+  <script>
+    function voegRijToe(gegevens = {naam:'', sinds:'', levert:'', aantal:''}) {
+      const tbody = document.getElementById('tabelBody');
+      const rij = document.createElement('tr');
+
+      rij.innerHTML = `
+        <td><input type="text" value="${gegevens.naam}"></td>
+        <td><input type="date" value="${gegevens.sinds}"></td>
+        <td><input type="text" value="${gegevens.levert}"></td>
+        <td><input type="text" value="${gegevens.aantal}"></td>
+        <td><button onclick="verwijderRij(this)">Verwijderen</button></td>
+      `;
+      tbody.appendChild(rij);
+    }
+
+    function verwijderRij(knop) {
+      const rij = knop.closest('tr');
+      rij.remove();
+    }
+
+    // Optioneel: begin met lege rij
+    voegRijToe();
+  </script>
+</body>
+</html>
